@@ -1,0 +1,8 @@
+/home/andreas/Documenti/Progetti/DrawableGeometries/build-minSizeRel/CMakeFiles/DrawableGeometries-lib.dir
+/home/andreas/Documenti/Progetti/DrawableGeometries/build-minSizeRel/CMakeFiles/DrawableGeometries-test.dir
+/home/andreas/Documenti/Progetti/DrawableGeometries/build-minSizeRel/CMakeFiles/edit_cache.dir
+/home/andreas/Documenti/Progetti/DrawableGeometries/build-minSizeRel/CMakeFiles/rebuild_cache.dir
+/home/andreas/Documenti/Progetti/DrawableGeometries/build-minSizeRel/CMakeFiles/list_install_components.dir
+/home/andreas/Documenti/Progetti/DrawableGeometries/build-minSizeRel/CMakeFiles/install.dir
+/home/andreas/Documenti/Progetti/DrawableGeometries/build-minSizeRel/CMakeFiles/install/local.dir
+/home/andreas/Documenti/Progetti/DrawableGeometries/build-minSizeRel/CMakeFiles/install/strip.dir

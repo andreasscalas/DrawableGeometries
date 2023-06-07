@@ -1,0 +1,8 @@
+/home/andreas/Documenti/Progetti/DrawableGeometries/build-debug/CMakeFiles/DrawableGeometries-lib.dir
+/home/andreas/Documenti/Progetti/DrawableGeometries/build-debug/CMakeFiles/DrawableGeometries-test.dir
+/home/andreas/Documenti/Progetti/DrawableGeometries/build-debug/CMakeFiles/edit_cache.dir
+/home/andreas/Documenti/Progetti/DrawableGeometries/build-debug/CMakeFiles/rebuild_cache.dir
+/home/andreas/Documenti/Progetti/DrawableGeometries/build-debug/CMakeFiles/list_install_components.dir
+/home/andreas/Documenti/Progetti/DrawableGeometries/build-debug/CMakeFiles/install.dir
+/home/andreas/Documenti/Progetti/DrawableGeometries/build-debug/CMakeFiles/install/local.dir
+/home/andreas/Documenti/Progetti/DrawableGeometries/build-debug/CMakeFiles/install/strip.dir
