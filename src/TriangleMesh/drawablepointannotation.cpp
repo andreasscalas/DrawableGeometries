@@ -8,6 +8,7 @@
 #include <vtkSphereSource.h>
 #include <vtkOBBTree.h>
 #include <vtkLine.h>
+#include <drawableattribute.hpp>
 
 DrawablePointAnnotation::DrawablePointAnnotation() : DrawableAnnotation()
 {
@@ -60,6 +61,12 @@ void DrawablePointAnnotation::draw(vtkSmartPointer<vtkPropAssembly> assembly)
     annotationActor->GetProperty()->SetOpacity(this->opacity);
     annotationActor->GetProperty()->SetPointSize(pointSize);
     canvas->AddPart(annotationActor);
+    if(drawAttributes)
+        for(unsigned int i = 0; i < attributes.size(); i++)
+        {
+            auto drawableAttribute = std::dynamic_pointer_cast<DrawableAttribute>(attributes[i]);
+            drawableAttribute->draw(canvas);
+        }
     //Drawing bounding box for selected annotated points
     if(selected){
         double corner[3], min[3], mid[3], max[3], sizes[3];

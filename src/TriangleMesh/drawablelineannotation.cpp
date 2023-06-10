@@ -6,6 +6,7 @@
 #include <vtkLine.h>
 #include <vtkProperty.h>
 #include <vtkSphereSource.h>
+#include <drawableattribute.hpp>
 
 using namespace std;
 
@@ -57,6 +58,12 @@ void DrawableLineAnnotation::draw(vtkSmartPointer<vtkPropAssembly> assembly)
     annotationActor->GetProperty()->SetOpacity(this->opacity);
     annotationActor->GetProperty()->SetLineWidth(lineWidth);
     canvas->AddPart(annotationActor);
+    if(drawAttributes)
+        for(unsigned int i = 0; i < attributes.size(); i++)
+        {
+            auto drawableAttribute = std::dynamic_pointer_cast<DrawableAttribute>(attributes[i]);
+            drawableAttribute->draw(canvas);
+        }
     if(selected){
         double sphereRadius = this->mesh->getAABBDiagonalLength() / 1000;
         for(unsigned int i = 0; i < polyLines.size(); i++){

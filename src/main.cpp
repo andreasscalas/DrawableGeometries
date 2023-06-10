@@ -13,6 +13,8 @@ VTK_MODULE_INIT(vtkRenderingOpenGL2)
 
 int main(int argc, char* argv[])
 {
+    if(argc < 3)
+        return 1;
     auto mesh = std::make_shared<DrawableTriangleMesh>();
     mesh->load(argv[1]);
     SemantisedTriangleMesh::AnnotationFileManager manager;

@@ -17,6 +17,7 @@ DrawableBoundingMeasure::DrawableBoundingMeasure() : BoundingMeasure(), Drawable
     direction = nullptr;
     drawPlanes = false;
     planeSize = 0.0;
+    value = nullptr;
 }
 
 DrawableBoundingMeasure::DrawableBoundingMeasure(BoundingMeasure measure) : BoundingMeasure(measure)
@@ -142,6 +143,8 @@ void DrawableBoundingMeasure::update()
     SemantisedTriangleMesh::Point o2 = extreme1 - (*p.first) - (*p.second);
     SemantisedTriangleMesh::Point p1_2 = o2 + (*p.first) * 2;
     SemantisedTriangleMesh::Point p2_2 = o2 + (*p.second) * 2;
+    delete p.first;
+    delete p.second;
     planeSource2->SetOrigin(o2.getX(), o2.getY(), o2.getZ());
     planeSource2->SetPoint1(p1_2.getX(), p1_2.getY(), p1_2.getZ());
     planeSource2->SetPoint2(p2_2.getX(), p2_2.getY(), p2_2.getZ());
