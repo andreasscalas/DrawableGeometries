@@ -30,12 +30,16 @@ public:
 
     virtual void print(std::ostream& os) override;
 
+    bool getDrawAnnotation() const;
+    void setDrawAnnotation(bool newDrawAnnotation);
+
 protected:
     vtkSmartPointer<vtkPoints> meshPoints;                     //Points data structure in VTK for the mesh
 
     double opacity;
     bool drawAttributes;                                       //True if the attributes has to be shown
     bool selected;
+    bool drawAnnotation;
 };
 
 #endif // DRAWABLEANNOTATION_H

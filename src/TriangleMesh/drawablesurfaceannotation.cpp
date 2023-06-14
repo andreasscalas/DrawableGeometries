@@ -39,47 +39,50 @@ void DrawableSurfaceAnnotation::draw(vtkSmartPointer<vtkPropAssembly> assembly)
 {
     assembly->RemovePart(canvas);
     canvas = vtkSmartPointer<vtkPropAssembly>::New();
-    vtkSmartPointer<vtkPolyData> annotationsPolydata = vtkSmartPointer<vtkPolyData>::New();
-    annotationsPolydata->SetPoints(meshPoints);
-    annotationsPolydata->SetPolys(annotatedTriangles);
-    annotationsPolydata->GetCellData()->SetScalars(annotationColors);
-    vtkSmartPointer<vtkPolyDataMapper> annotationMapper = vtkSmartPointer<vtkPolyDataMapper>::New();
-    auto annotationActor = vtkSmartPointer<vtkActor>::New();
-    annotationMapper->SetInputData(annotationsPolydata);
-    annotationActor->SetMapper(annotationMapper);
-    annotationActor->GetProperty()->SetOpacity(this->opacity);
-    canvas->AddPart(annotationActor);
-    if(drawAttributes)
-        for(unsigned int i = 0; i < attributes.size(); i++)
-        {
-            auto drawableAttribute = std::dynamic_pointer_cast<DrawableAttribute>(attributes[i]);
-            drawableAttribute->draw(canvas);
-        }
-
-    if(selected){
-        auto outlinesData = vtkSmartPointer<vtkPolyData>::New();
-        auto vtkOutlines = vtkSmartPointer<vtkCellArray>::New();
-        auto outlinesMapper = vtkSmartPointer<vtkPolyDataMapper>::New();
-        outlinesActor = vtkSmartPointer<vtkActor>::NewInstance(outlinesActor);
-        for(uint i = 0; i < outlines.size(); i++){
-            for(uint j = 1; j < outlines[i].size(); j++){
-                vtkSmartPointer<vtkLine> line = vtkSmartPointer<vtkLine>::New();
-                uint v1id = std::stoi(outlines[i][j - 1]->getId());
-                uint v2id = std::stoi(outlines[i][j]->getId());
-                line->GetPointIds()->SetNumberOfIds(2);
-                line->GetPointIds()->SetId(0, static_cast<vtkIdType>(v1id));
-                line->GetPointIds()->SetId(1, static_cast<vtkIdType>(v2id));
-                vtkOutlines->InsertNextCell(line);
+    if(drawAnnotation)
+    {
+        vtkSmartPointer<vtkPolyData> annotationsPolydata = vtkSmartPointer<vtkPolyData>::New();
+        annotationsPolydata->SetPoints(meshPoints);
+        annotationsPolydata->SetPolys(annotatedTriangles);
+        annotationsPolydata->GetCellData()->SetScalars(annotationColors);
+        vtkSmartPointer<vtkPolyDataMapper> annotationMapper = vtkSmartPointer<vtkPolyDataMapper>::New();
+        auto annotationActor = vtkSmartPointer<vtkActor>::New();
+        annotationMapper->SetInputData(annotationsPolydata);
+        annotationActor->SetMapper(annotationMapper);
+        annotationActor->GetProperty()->SetOpacity(this->opacity);
+        canvas->AddPart(annotationActor);
+        if(drawAttributes)
+            for(unsigned int i = 0; i < attributes.size(); i++)
+            {
+                auto drawableAttribute = std::dynamic_pointer_cast<DrawableAttribute>(attributes[i]);
+                drawableAttribute->draw(canvas);
             }
+
+        if(selected){
+            auto outlinesData = vtkSmartPointer<vtkPolyData>::New();
+            auto vtkOutlines = vtkSmartPointer<vtkCellArray>::New();
+            auto outlinesMapper = vtkSmartPointer<vtkPolyDataMapper>::New();
+            outlinesActor = vtkSmartPointer<vtkActor>::NewInstance(outlinesActor);
+            for(uint i = 0; i < outlines.size(); i++){
+                for(uint j = 1; j < outlines[i].size(); j++){
+                    vtkSmartPointer<vtkLine> line = vtkSmartPointer<vtkLine>::New();
+                    uint v1id = std::stoi(outlines[i][j - 1]->getId());
+                    uint v2id = std::stoi(outlines[i][j]->getId());
+                    line->GetPointIds()->SetNumberOfIds(2);
+                    line->GetPointIds()->SetId(0, static_cast<vtkIdType>(v1id));
+                    line->GetPointIds()->SetId(1, static_cast<vtkIdType>(v2id));
+                    vtkOutlines->InsertNextCell(line);
+                }
+            }
+            outlinesData->SetPoints(meshPoints);
+            outlinesData->SetLines(vtkOutlines);
+            outlinesMapper->SetInputData(outlinesData);
+            outlinesActor->SetMapper(outlinesMapper);
+            outlinesActor->GetProperty()->SetLineWidth(5.0);
+            outlinesActor->GetProperty()->SetColor(1, 0, 0);
+            outlinesActor->GetProperty()->SetOpacity(1.0);
+            canvas->AddPart(outlinesActor);
         }
-        outlinesData->SetPoints(meshPoints);
-        outlinesData->SetLines(vtkOutlines);
-        outlinesMapper->SetInputData(outlinesData);
-        outlinesActor->SetMapper(outlinesMapper);
-        outlinesActor->GetProperty()->SetLineWidth(5.0);
-        outlinesActor->GetProperty()->SetColor(1, 0, 0);
-        outlinesActor->GetProperty()->SetOpacity(1.0);
-        canvas->AddPart(outlinesActor);
     }
     canvas->Modified();
     assembly->AddPart(canvas);

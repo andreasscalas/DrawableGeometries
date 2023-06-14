@@ -12,6 +12,7 @@ DrawableAnnotation::DrawableAnnotation()
     this->drawAttributes = false;
     this->selected = false;
     this->opacity = 1.0;
+    this->drawAnnotation = true;
 }
 
 vtkSmartPointer<vtkPoints> DrawableAnnotation::getMeshPoints() const
@@ -114,4 +115,14 @@ void DrawableAnnotation::print(std::ostream& os)
     else
         os << "Annotation isn't selected";
     os << std::endl;
+}
+
+bool DrawableAnnotation::getDrawAnnotation() const
+{
+    return drawAnnotation;
+}
+
+void DrawableAnnotation::setDrawAnnotation(bool newDrawAnnotation)
+{
+    drawAnnotation = newDrawAnnotation;
 }
