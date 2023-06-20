@@ -15,6 +15,25 @@ DrawableAnnotation::DrawableAnnotation()
     this->drawAnnotation = true;
 }
 
+void DrawableAnnotation::draw(vtkSmartPointer<vtkPropAssembly> assembly)
+{
+
+    assembly->RemovePart(canvas);
+    canvas = vtkSmartPointer<vtkPropAssembly>::New();
+    if(drawAttributes)
+        for(unsigned int i = 0; i < attributes.size(); i++)
+            if(attributes[i]->isGeometric())
+            {
+                auto drawableAttribute = std::dynamic_pointer_cast<DrawableAttribute>(attributes[i]);
+                drawableAttribute->draw(canvas);
+            }
+
+    canvas->Modified();
+    assembly->AddPart(canvas);
+    assembly->Modified();
+
+}
+
 vtkSmartPointer<vtkPoints> DrawableAnnotation::getMeshPoints() const
 {
     return meshPoints;
@@ -52,6 +71,7 @@ void DrawableAnnotation::addAttribute(std::shared_ptr<SemantisedTriangleMesh::At
         {
             auto boundingMeasure = std::dynamic_pointer_cast<SemantisedTriangleMesh::BoundingMeasure>(geometricAttribute);
             newAttribute = std::make_shared<DrawableBoundingMeasure>(*boundingMeasure);
+            std::dynamic_pointer_cast<DrawableBoundingMeasure>(newAttribute)->setDrawPlanes(false);
             break;
         }
 

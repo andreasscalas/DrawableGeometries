@@ -25,6 +25,7 @@ DrawableGeodesicMeasure::DrawableGeodesicMeasure(GeodesicMeasure measure)
     id = measure.getId();
     key = measure.getKey();
     type = measure.getType();
+    setIsGeometric(true);
     if(value != nullptr)
         value = measure.getValue();
     else

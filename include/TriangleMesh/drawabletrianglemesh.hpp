@@ -34,6 +34,7 @@ public:
 
     bool getDrawAnnotations() const;
     void setDrawAnnotations(bool newDrawAnnotations);
+    const std::vector<std::shared_ptr<SemantisedTriangleMesh::Annotation> > getSelectedAnnotations() const;
     void setAnnotations(const std::vector<std::shared_ptr<SemantisedTriangleMesh::Annotation> > &newAnnotations);
     bool addAnnotation(const std::shared_ptr<SemantisedTriangleMesh::Annotation> &newAnnotation);
 

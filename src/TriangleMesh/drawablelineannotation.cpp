@@ -45,8 +45,8 @@ void DrawableLineAnnotation::setLineWidth(float value)
 
 void DrawableLineAnnotation::draw(vtkSmartPointer<vtkPropAssembly> assembly)
 {
-    assembly->RemovePart(canvas);
-    canvas = vtkSmartPointer<vtkPropAssembly>::New();
+
+    DrawableAnnotation::draw(assembly);
     if(drawAnnotation)
     {
         vtkSmartPointer<vtkPolyData> annotationsPolydata = vtkSmartPointer<vtkPolyData>::New();
@@ -60,12 +60,7 @@ void DrawableLineAnnotation::draw(vtkSmartPointer<vtkPropAssembly> assembly)
         annotationActor->GetProperty()->SetOpacity(this->opacity);
         annotationActor->GetProperty()->SetLineWidth(lineWidth);
         canvas->AddPart(annotationActor);
-        if(drawAttributes)
-            for(unsigned int i = 0; i < attributes.size(); i++)
-            {
-                auto drawableAttribute = std::dynamic_pointer_cast<DrawableAttribute>(attributes[i]);
-                drawableAttribute->draw(canvas);
-            }
+
         if(selected){
             double sphereRadius = this->mesh->getAABBDiagonalLength() / 1000;
             for(unsigned int i = 0; i < polyLines.size(); i++){
@@ -92,9 +87,6 @@ void DrawableLineAnnotation::draw(vtkSmartPointer<vtkPropAssembly> assembly)
             }
         }
     }
-    canvas->Modified();
-    assembly->AddPart(canvas);
-    assembly->Modified();
 }
 
 void DrawableLineAnnotation::update()

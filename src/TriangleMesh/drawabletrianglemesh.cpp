@@ -178,6 +178,17 @@ void DrawableTriangleMesh::setDrawAnnotations(bool newDrawAnnotations)
     drawAnnotations = newDrawAnnotations;
 }
 
+
+
+const std::vector<std::shared_ptr<Annotation> > DrawableTriangleMesh::getSelectedAnnotations() const
+{
+    std::vector<std::shared_ptr<Annotation> > selectedAnnotations;
+    for(auto ann : annotations)
+        if(std::dynamic_pointer_cast<DrawableAnnotation>(ann)->getSelected())
+            selectedAnnotations.push_back(ann);
+    return selectedAnnotations;
+}
+
 void DrawableTriangleMesh::setAnnotations(const std::vector<std::shared_ptr<Annotation> > &newAnnotations)
 {
     annotations.clear();
@@ -214,6 +225,7 @@ bool DrawableTriangleMesh::addAnnotation(const std::shared_ptr<Annotation> &newA
     annotation->resetAttributes();
     for(auto attribute : attributes)
         annotation->addAttribute(attribute);
+
     TriangleMesh::addAnnotation(annotation);
     annotation->setMeshPoints(this->meshVertices);
     annotation->setDrawAttributes(true);

@@ -37,8 +37,7 @@ void DrawableSurfaceAnnotation::init()
 
 void DrawableSurfaceAnnotation::draw(vtkSmartPointer<vtkPropAssembly> assembly)
 {
-    assembly->RemovePart(canvas);
-    canvas = vtkSmartPointer<vtkPropAssembly>::New();
+    DrawableAnnotation::draw(assembly);
     if(drawAnnotation)
     {
         vtkSmartPointer<vtkPolyData> annotationsPolydata = vtkSmartPointer<vtkPolyData>::New();
@@ -51,12 +50,6 @@ void DrawableSurfaceAnnotation::draw(vtkSmartPointer<vtkPropAssembly> assembly)
         annotationActor->SetMapper(annotationMapper);
         annotationActor->GetProperty()->SetOpacity(this->opacity);
         canvas->AddPart(annotationActor);
-        if(drawAttributes)
-            for(unsigned int i = 0; i < attributes.size(); i++)
-            {
-                auto drawableAttribute = std::dynamic_pointer_cast<DrawableAttribute>(attributes[i]);
-                drawableAttribute->draw(canvas);
-            }
 
         if(selected){
             auto outlinesData = vtkSmartPointer<vtkPolyData>::New();
@@ -84,9 +77,6 @@ void DrawableSurfaceAnnotation::draw(vtkSmartPointer<vtkPropAssembly> assembly)
             canvas->AddPart(outlinesActor);
         }
     }
-    canvas->Modified();
-    assembly->AddPart(canvas);
-    assembly->Modified();
 }
 
 void DrawableSurfaceAnnotation::update()

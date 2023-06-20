@@ -41,8 +41,7 @@ void DrawablePointAnnotation::init()
 
 void DrawablePointAnnotation::draw(vtkSmartPointer<vtkPropAssembly> assembly)
 {
-    assembly->RemovePart(canvas);
-    canvas = vtkSmartPointer<vtkPropAssembly>::New();
+    DrawableAnnotation::draw(assembly);
     if(drawAnnotation)
     {
         vtkSmartPointer<vtkPolyData> annotationsPolydata = vtkSmartPointer<vtkPolyData>::New();
@@ -63,12 +62,6 @@ void DrawablePointAnnotation::draw(vtkSmartPointer<vtkPropAssembly> assembly)
         annotationActor->GetProperty()->SetOpacity(this->opacity);
         annotationActor->GetProperty()->SetPointSize(pointSize);
         canvas->AddPart(annotationActor);
-        if(drawAttributes)
-            for(unsigned int i = 0; i < attributes.size(); i++)
-            {
-                auto drawableAttribute = std::dynamic_pointer_cast<DrawableAttribute>(attributes[i]);
-                drawableAttribute->draw(canvas);
-            }
         //Drawing bounding box for selected annotated points
         if(selected){
             double corner[3], min[3], mid[3], max[3], sizes[3];
@@ -175,9 +168,6 @@ void DrawablePointAnnotation::draw(vtkSmartPointer<vtkPropAssembly> assembly)
             canvas->AddPart(outlineActor);
         }
     }
-    canvas->Modified();
-    assembly->AddPart(canvas);
-    assembly->Modified();
 }
 void DrawablePointAnnotation::update()
 {

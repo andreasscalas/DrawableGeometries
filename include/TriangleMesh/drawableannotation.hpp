@@ -12,7 +12,7 @@ class DrawableAnnotation : virtual public DrawableObject, virtual public Semanti
 public:
     DrawableAnnotation();
 
-    virtual void draw(vtkSmartPointer<vtkPropAssembly> assembly) = 0;
+    virtual void draw(vtkSmartPointer<vtkPropAssembly> assembly);
     virtual void update() = 0;
     virtual void clear() = 0;
     vtkSmartPointer<vtkPoints> getMeshPoints() const;

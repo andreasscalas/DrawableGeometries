@@ -29,6 +29,7 @@ DrawableBoundingMeasure::DrawableBoundingMeasure(BoundingMeasure measure) : Boun
     id = measure.getId();
     key = measure.getKey();
     type = measure.getType();
+    setIsGeometric(true);
     if(value != nullptr)
         value = measure.getValue();
     else
