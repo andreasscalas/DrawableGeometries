@@ -5,6 +5,8 @@
 #include <drawablegeodesicmeasure.hpp>
 #include <geometricattribute.hpp>
 
+using namespace Drawables;
+
 DrawableAnnotation::DrawableAnnotation()
 {
     meshPoints = vtkSmartPointer<vtkPoints>::New();

@@ -8,6 +8,7 @@
 #include <vtkTransformPolyDataFilter.h>
 #include <vtkProperty.h>
 
+using namespace Drawables;
 Ellipsoid::Ellipsoid()
 {
     xRadius = 0;

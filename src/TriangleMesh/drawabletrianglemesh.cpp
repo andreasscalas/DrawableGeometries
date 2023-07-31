@@ -14,6 +14,7 @@
 #include <drawablesurfaceannotation.hpp>
 
 using namespace SemantisedTriangleMesh;
+using namespace Drawables;
 
 DrawableTriangleMesh::DrawableTriangleMesh() : TriangleMesh()
 {

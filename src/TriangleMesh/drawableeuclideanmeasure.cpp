@@ -10,6 +10,9 @@
 #include <vtkRenderer.h>
 #include <vtkAxisActor2D.h>
 
+
+using namespace Drawables;
+
 DrawableEuclideanMeasure::DrawableEuclideanMeasure() : SemantisedTriangleMesh::EuclideanMeasure(), DrawableAttribute()
 {
     points = vtkSmartPointer<vtkPoints>::New();

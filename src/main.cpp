@@ -1,5 +1,5 @@
 #include "drawabletrianglemesh.hpp"
-#include <annotationfilemanager.hpp>
+#include <semanticsfilemanager.hpp>
 #include <vtkRenderer.h>
 #include <vtkRenderWindow.h>
 #include <vtkRenderWindowInteractor.h>
@@ -15,9 +15,9 @@ int main(int argc, char* argv[])
 {
     if(argc < 3)
         return 1;
-    auto mesh = std::make_shared<DrawableTriangleMesh>();
+    auto mesh = std::make_shared<Drawables::DrawableTriangleMesh>();
     mesh->load(argv[1]);
-    SemantisedTriangleMesh::AnnotationFileManager manager;
+    SemantisedTriangleMesh::SemanticsFileManager manager;
     manager.setMesh(mesh);
     auto annotations = manager.readAndStoreAnnotations(argv[2]);
     mesh->setAnnotations(annotations);
@@ -32,7 +32,7 @@ int main(int argc, char* argv[])
     mesh->setDrawAnnotations(true);
     mesh->draw(canvas);
     mesh->computeShortestPath(mesh->getVertex("0"), mesh->getVertex(std::to_string(mesh->getVerticesNumber() - 1)), SemantisedTriangleMesh::DistanceType::EUCLIDEAN_DISTANCE, true, true);
-    auto parallelepiped = std::make_shared<DrawableParallelepiped>();
+    auto parallelepiped = std::make_shared<Drawables::DrawableParallelepiped>();
     mesh->computeProperties();
     parallelepiped->setP1(mesh->getMin());
     parallelepiped->setP2(mesh->getMax());
@@ -42,7 +42,7 @@ int main(int argc, char* argv[])
     parallelepiped->setDrawWireframe(true);
     parallelepiped->update();
     //parallelepiped->draw(canvas);
-    auto sphere = std::make_shared<DrawableEllipsoid>();
+    auto sphere = std::make_shared<Drawables::DrawableEllipsoid>();
     sphere->setCentre(mesh->getMin());
     sphere->setXRadius(10);
     sphere->setYRadius(10);
@@ -57,7 +57,7 @@ int main(int argc, char* argv[])
     //sphere->draw(canvas);
 
     auto cylinderAxis = SemantisedTriangleMesh::Point(mesh->getMax().getX() - mesh->getMin().getX(), 0, 0);
-    auto cylinder = std::make_shared<DrawableCylinder>();
+    auto cylinder = std::make_shared<Drawables::DrawableCylinder>();
     cylinder->setCentre(mesh->getMax());
     cylinder->setRadius(5);
     cylinder->setHeight(cylinderAxis.norm());

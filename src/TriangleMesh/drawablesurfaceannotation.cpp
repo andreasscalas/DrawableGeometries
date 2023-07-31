@@ -9,6 +9,8 @@
 #include <drawableattribute.hpp>
 
 using namespace std;
+using namespace Drawables;
+
 
 DrawableSurfaceAnnotation::DrawableSurfaceAnnotation() : DrawableAnnotation()
 {

@@ -11,6 +11,8 @@
 #include <vtkRenderer.h>
 #include <vtkAxisActor2D.h>
 
+using namespace Drawables;
+
 DrawableBoundingMeasure::DrawableBoundingMeasure() : BoundingMeasure(), DrawableAttribute()
 {
     points = vtkSmartPointer<vtkPoints>::New();

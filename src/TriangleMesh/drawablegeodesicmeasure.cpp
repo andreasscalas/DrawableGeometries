@@ -8,6 +8,9 @@
 #include <vtkVertexGlyphFilter.h>
 #include <vtkBillboardTextActor3D.h>
 
+
+using namespace Drawables;
+
 DrawableGeodesicMeasure::DrawableGeodesicMeasure(): SemantisedTriangleMesh::GeodesicMeasure(), DrawableAttribute()
 {
     pointsActor = vtkSmartPointer<vtkActor>::New();

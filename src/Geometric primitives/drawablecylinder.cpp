@@ -7,6 +7,7 @@
 #include <vtkTransformPolyDataFilter.h>
 #include <vtkProperty.h>
 
+using namespace Drawables;
 Cylinder::Cylinder()
 {
     radius = 0;

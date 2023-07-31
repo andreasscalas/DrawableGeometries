@@ -11,6 +11,7 @@
 #include <vtkPolyData.h>
 #include <vtkTriangle.h>
 
+using namespace Drawables;
 SemantisedTriangleMesh::Point Parallelepiped::getP1() const
 {
     return p1;

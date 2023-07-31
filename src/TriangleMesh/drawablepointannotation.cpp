@@ -10,6 +10,9 @@
 #include <vtkLine.h>
 #include <drawableattribute.hpp>
 
+
+using namespace Drawables;
+
 DrawablePointAnnotation::DrawablePointAnnotation() : DrawableAnnotation()
 {
     init();
